@@ -31,6 +31,15 @@ public class Board extends BaseTime{
 	@Column(name = "password", nullable = false)
 	private String password;
 
+	@Builder
+	public Board(Long id, String title, String content, String name, String password) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.name = name;
+		this.password = password;
+	}
+
 	public void update(String title, String content){
 		this.title = title;
 		this.content = content;
