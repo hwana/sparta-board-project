@@ -7,9 +7,7 @@ import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.repository.BoardRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Delete;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
