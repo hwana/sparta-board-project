@@ -1,7 +1,6 @@
 package com.sparta.boardproject.board.controller;
 
 import com.sparta.boardproject.board.dto.request.CreateBoardRequestDto;
-import com.sparta.boardproject.board.dto.request.DeleteBoardRequestDto;
 import com.sparta.boardproject.board.dto.request.UpdateBoardRequestDto;
 import com.sparta.boardproject.board.dto.response.BoardResponseDto;
 import com.sparta.boardproject.board.entity.Board;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,8 +68,8 @@ public class BoardController {
 	 * @return
 	 */
 	@DeleteMapping("/board/{id}")
-	public ResponseEntity<Void> deleteBoard(@PathVariable long id, @RequestBody DeleteBoardRequestDto request) {
-		boardService.delete(id, request);
+	public ResponseEntity<Void> deleteBoard(@PathVariable long id, @RequestHeader String password) {
+		boardService.delete(id, password);
 		return ResponseEntity.ok().build();
 	}
 

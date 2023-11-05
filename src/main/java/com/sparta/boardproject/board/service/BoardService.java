@@ -1,7 +1,6 @@
 package com.sparta.boardproject.board.service;
 
 import com.sparta.boardproject.board.dto.request.CreateBoardRequestDto;
-import com.sparta.boardproject.board.dto.request.DeleteBoardRequestDto;
 import com.sparta.boardproject.board.dto.request.UpdateBoardRequestDto;
 import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.repository.BoardRepository;
@@ -32,9 +31,9 @@ public class BoardService {
 	}
 
 	// 게시글 삭제
-	public void delete(long id, DeleteBoardRequestDto request) {
+	public void delete(long id, String password) {
 		Board board = getBoardById(id);
-		passwordCheck(board, request.getPassword());
+		passwordCheck(board, password);
 		boardRepository.delete(board);
 	}
 
