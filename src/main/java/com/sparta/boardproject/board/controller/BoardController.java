@@ -32,9 +32,9 @@ public class BoardController {
 	 * @return
 	 */
 	@PostMapping("/board")
-	public ResponseEntity<Board> addBoard(@RequestBody CreateBoardRequestDto request) {
+	public ResponseEntity<BoardResponseDto> addBoard(@RequestBody CreateBoardRequestDto request) {
 		Board savedBoard = boardService.save(request);
-		return ResponseEntity.status(HttpStatus.CREATED).body(savedBoard);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new BoardResponseDto(savedBoard));
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class BoardController {
 	 */
 	@GetMapping("/board/{id}")
 	public ResponseEntity<BoardResponseDto> findBoard(@PathVariable long id) {
-		Board Board = boardService.findById(id);
-		return ResponseEntity.ok().body(new BoardResponseDto(Board));
+		Board board = boardService.findById(id);
+		return ResponseEntity.ok().body(new BoardResponseDto(board));
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class BoardController {
 	 * @return
 	 */
 	@PatchMapping("/board/{id}")
-	public ResponseEntity<Board> updateBoard(@PathVariable long id, @RequestBody UpdateBoardRequestDto request) {
+	public ResponseEntity<BoardResponseDto> updateBoard(@PathVariable long id, @RequestBody UpdateBoardRequestDto request) {
 		Board updatedBoard = boardService.update(id, request);
-		return ResponseEntity.ok().body(updatedBoard);
+		return ResponseEntity.ok().body(new BoardResponseDto(updatedBoard));
 	}
 }
