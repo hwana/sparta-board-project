@@ -1,10 +1,6 @@
 package com.sparta.boardproject.board.dto.response;
 
 import com.sparta.boardproject.board.entity.Board;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Getter;
 
 @Getter
