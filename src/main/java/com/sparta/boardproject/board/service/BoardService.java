@@ -4,6 +4,8 @@ import com.sparta.boardproject.board.dto.request.CreateBoardRequestDto;
 import com.sparta.boardproject.board.dto.request.UpdateBoardRequestDto;
 import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.repository.BoardRepository;
+import com.sparta.boardproject.common.exception.CustomException;
+import com.sparta.boardproject.common.exception.StatusEnum;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -48,14 +50,14 @@ public class BoardService {
 
 	// id로 게시글 찾기
 	private Board getBoardById(long id) {
-		return boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+		return boardRepository.findById(id).orElseThrow(() -> new CustomException(StatusEnum.BOARD_NOT_FOUND));
 	}
 
 
 	// 비밀 번호 일치 여부 확인
 	private void passwordCheck(Board board, String inputPassword) {
 		if (!board.getPassword().equals(inputPassword)) {
-			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+			throw new CustomException(StatusEnum.PASSWORD_NOT_MATCHED);
 		}
 	}
 }
