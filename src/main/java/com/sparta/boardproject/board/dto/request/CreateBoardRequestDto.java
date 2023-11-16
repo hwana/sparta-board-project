@@ -1,5 +1,6 @@
 package com.sparta.boardproject.board.dto.request;
 
+import com.sparta.boardproject.User.entity.User;
 import com.sparta.boardproject.board.entity.Board;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,19 +11,13 @@ import lombok.NoArgsConstructor;
 @Getter
 public class CreateBoardRequestDto {
 	private String title;
-
 	private String content;
 
-	private String name;
-
-	private String password;
-
-	public Board toEntity() {
+	public Board toEntity(User user) {
 		return Board.builder()
 			.title(title)
 			.content(content)
-			.name(name)
-			.password(password)
+			.user(user)
 			.build();
 	}
 }

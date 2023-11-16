@@ -1,10 +1,13 @@
 package com.sparta.boardproject.board.entity;
 
+import com.sparta.boardproject.User.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,19 +28,22 @@ public class Board extends BaseTime{
 	@Column(name = "content", nullable = false)
 	private String content;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-	@Column(name = "password", nullable = false)
-	private String password;
+	@Column(nullable = false)
+	private String username;
+
+	@Column(name = "status", columnDefinition = "boolean default false")
+	private boolean status;
 
 	@Builder
-	public Board(Long id, String title, String content, String name, String password) {
-		this.id = id;
+	public Board(Long id, String title, String content, User user) {
 		this.title = title;
 		this.content = content;
-		this.name = name;
-		this.password = password;
+		this.user = user;
+		this.username = user.getUsername();
 	}
 
 	public void update(String title, String content){

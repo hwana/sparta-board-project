@@ -2,13 +2,20 @@ package com.sparta.boardproject.board.controller;
 
 import com.sparta.boardproject.board.dto.request.CreateBoardRequestDto;
 import com.sparta.boardproject.board.dto.request.UpdateBoardRequestDto;
+import com.sparta.boardproject.board.dto.response.BoardListResponseDto;
 import com.sparta.boardproject.board.dto.response.BoardResponseDto;
 import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.service.BoardService;
+import com.sparta.boardproject.config.jwt.JwtUtil;
+import com.sparta.boardproject.config.security.UserDetailsImpl;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,62 +33,58 @@ public class BoardController {
 
 	private final BoardService boardService;
 
+
 	/**
-	 * 게시글 작성
-	 * @param request : 게시글 작성 내용
+	 * 할 일 카드 작성
+	 * @param request : 할 일 카드 작성 내용
 	 * @return
 	 */
 	@PostMapping("/board")
-	public ResponseEntity<BoardResponseDto> addBoard(@RequestBody CreateBoardRequestDto request) {
-		Board savedBoard = boardService.save(request);
+	public ResponseEntity<BoardResponseDto> createBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CreateBoardRequestDto request) {
+		Board savedBoard = boardService.createBoard(request, userDetails.getUser());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new BoardResponseDto(savedBoard));
 	}
 
 	/**
-	 * 전체 게시글 조회
+	 * 전체 할 일 카드 조회
 	 * @return
 	 */
 	@GetMapping("/board")
-	public ResponseEntity<List<BoardResponseDto>> findAllBoards() {
-		List<BoardResponseDto> boards = boardService.findAll()
-			.stream()
-			.map(BoardResponseDto::new)
-			.toList();
-
-		return ResponseEntity.ok().body(boards);
+	public ResponseEntity<Map<String, List<BoardListResponseDto>>> findAllBoards() {
+		return ResponseEntity.ok().body(boardService.findBoardList());
 	}
 
 	/**
-	 * 게시글 단건 조회
+	 * 할 일 카드 단건 조회
 	 * @param id
 	 * @return
 	 */
 	@GetMapping("/board/{id}")
 	public ResponseEntity<BoardResponseDto> findBoard(@PathVariable long id) {
-		Board board = boardService.findById(id);
+		Board board = boardService.findBoardById(id);
 		return ResponseEntity.ok().body(new BoardResponseDto(board));
 	}
 
 	/**
-	 * 게시글 삭제
+	 * 할 일 카드 삭제
 	 * @param id
 	 * @return
 	 */
 	@DeleteMapping("/board/{id}")
-	public ResponseEntity<Void> deleteBoard(@PathVariable long id, @RequestHeader String password) {
-		boardService.delete(id, password);
+	public ResponseEntity<Void> deleteBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable long id) {
+		boardService.deleteBoard(id, userDetails.getUser());
 		return ResponseEntity.ok().build();
 	}
 
 	/**
-	 * 게시글 수정
+	 * 할 일 카드 수정
 	 * @param id
 	 * @param request
 	 * @return
 	 */
 	@PatchMapping("/board/{id}")
-	public ResponseEntity<BoardResponseDto> updateBoard(@PathVariable long id, @RequestBody UpdateBoardRequestDto request) {
-		Board updatedBoard = boardService.update(id, request);
+	public ResponseEntity<BoardResponseDto> updateBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable long id, @RequestBody UpdateBoardRequestDto request) {
+		Board updatedBoard = boardService.updateBoard(id, request, userDetails.getUser());
 		return ResponseEntity.ok().body(new BoardResponseDto(updatedBoard));
 	}
 }

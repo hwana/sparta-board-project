@@ -10,6 +10,4 @@ import lombok.NoArgsConstructor;
 public class UpdateBoardRequestDto {
 	private String title;
 	private String content;
-	private String name;
-	private String password;
 }
