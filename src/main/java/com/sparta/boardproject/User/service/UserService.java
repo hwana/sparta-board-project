@@ -5,7 +5,6 @@ import com.sparta.boardproject.User.entity.User;
 import com.sparta.boardproject.User.repository.UserRepository;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
-import com.sparta.boardproject.config.jwt.JwtUtil;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
