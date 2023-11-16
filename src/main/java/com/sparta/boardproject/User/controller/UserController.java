@@ -1,5 +1,6 @@
 package com.sparta.boardproject.User.controller;
 
+import com.sparta.boardproject.User.dto.LoginRequestDto;
 import com.sparta.boardproject.User.dto.SignupRequestDto;
 import com.sparta.boardproject.User.service.UserService;
 import com.sparta.boardproject.common.exception.CustomResponseEntity;
@@ -20,8 +21,8 @@ public class UserController {
 	private final UserService userService;
 
 	@PostMapping("/user/signup")
-	public ResponseEntity<CustomResponseEntity> signup(@Valid @RequestBody SignupRequestDto requestDto) {
-		userService.signup(requestDto);
+	public ResponseEntity<CustomResponseEntity> signup(@Valid @RequestBody SignupRequestDto signupRequestDto) {
+		userService.signup(signupRequestDto);
 		return CustomResponseEntity.toResponseEntity(StatusEnum.SUCCESS);
 	}
 }

@@ -59,7 +59,7 @@ public class BoardService {
 	// 비밀 번호 일치 여부 확인
 	private void passwordCheck(Board board, String inputPassword) {
 		if (!board.getPassword().equals(inputPassword)) {
-			throw new CustomException(StatusEnum.PASSWORD_NOT_MATCHED);
+			throw new CustomException(StatusEnum.BadCredentialsException);
 		}
 	}
 }
