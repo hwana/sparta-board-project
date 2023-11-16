@@ -1,6 +1,5 @@
 package com.sparta.boardproject.User.controller;
 
-import com.sparta.boardproject.User.dto.LoginRequestDto;
 import com.sparta.boardproject.User.dto.SignupRequestDto;
 import com.sparta.boardproject.User.service.UserService;
 import com.sparta.boardproject.common.exception.CustomResponseEntity;

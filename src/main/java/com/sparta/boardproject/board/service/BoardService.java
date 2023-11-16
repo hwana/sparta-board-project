@@ -6,12 +6,10 @@ import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.repository.BoardRepository;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
-import jakarta.servlet.Filter;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.HandlerInterceptor;
 
 @RequiredArgsConstructor
 @Service

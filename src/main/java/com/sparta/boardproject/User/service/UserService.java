@@ -1,13 +1,11 @@
 package com.sparta.boardproject.User.service;
 
-import com.sparta.boardproject.User.dto.LoginRequestDto;
 import com.sparta.boardproject.User.dto.SignupRequestDto;
 import com.sparta.boardproject.User.entity.User;
 import com.sparta.boardproject.User.repository.UserRepository;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
 import com.sparta.boardproject.config.jwt.JwtUtil;
-import jakarta.servlet.http.HttpServletResponse;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,12 +14,10 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtUtil jwtUtil;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.jwtUtil = jwtUtil;
     }
 
     public void signup(SignupRequestDto signupRequestDto) {
