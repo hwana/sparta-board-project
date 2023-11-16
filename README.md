@@ -1,6 +1,6 @@
-Spring Boot CRUD API
-[1주차]📰스파르타 게시판 API 만들기
-[2주차]✅투두리스트 API 만들기
+# Spring Boot CRUD API 
+- [1주차][📰스파르타 게시판 API 만들기]
+- [2주차][✅투두리스트 API 만들기](https://github.com/hwana/sparta-board-project/tree/second-week)
 
 ## 요구사항
 ### 게시글 작성 기능
