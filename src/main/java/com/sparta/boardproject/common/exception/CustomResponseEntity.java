@@ -9,28 +9,16 @@ import org.springframework.http.ResponseEntity;
 @Builder
 public class CustomResponseEntity {
 	private int status;
-	private String name;
+	private String description;
 	private String message;
 
-	//enum으로 관리할 경우
 	public static ResponseEntity<CustomResponseEntity> toResponseEntity(StatusEnum e){
 		return ResponseEntity
 			.status(e.getHttpStatus())
 			.body(CustomResponseEntity.builder()
 				.status(e.getHttpStatus().value())
-				.name(e.name())
+				.description(e.name())
 				.message(e.getMessage())
 				.build());
-	}
-
-	//enum으로 관리가 안될 경우
-	public static ResponseEntity<CustomResponseEntity> toResponseEntity(String message, HttpStatus status){
-		return ResponseEntity
-				.status(status)
-				.body(CustomResponseEntity.builder()
-						.status(status.value())
-						.name(status.name())
-						.message(message)
-						.build());
 	}
 }
