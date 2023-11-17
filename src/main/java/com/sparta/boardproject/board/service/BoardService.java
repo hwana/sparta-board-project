@@ -1,14 +1,13 @@
 package com.sparta.boardproject.board.service;
 
-import com.sparta.boardproject.user.entity.User;
 import com.sparta.boardproject.board.dto.request.CreateBoardRequestDto;
 import com.sparta.boardproject.board.dto.request.UpdateBoardRequestDto;
 import com.sparta.boardproject.board.dto.response.BoardListResponseDto;
-import com.sparta.boardproject.board.dto.response.BoardResponseDto;
 import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.repository.BoardRepository;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
+import com.sparta.boardproject.user.entity.User;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Map;

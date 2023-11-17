@@ -1,14 +1,12 @@
 package com.sparta.boardproject.comment.controller;
 
+import com.sparta.boardproject.comment.dto.request.CreateCommentRequestDto;
 import com.sparta.boardproject.comment.dto.request.UpdateCommentRequestDto;
 import com.sparta.boardproject.comment.dto.response.CommentResponseDto;
-import com.sparta.boardproject.comment.dto.request.CreateCommentRequestDto;
 import com.sparta.boardproject.comment.entity.Comment;
 import com.sparta.boardproject.comment.service.CommentService;
 import com.sparta.boardproject.config.security.UserDetailsImpl;
-import java.net.http.HttpResponse.ResponseInfo;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
