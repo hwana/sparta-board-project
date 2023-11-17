@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/board")
 public class BoardController {
 
 	private final BoardService boardService;
@@ -49,7 +49,7 @@ public class BoardController {
 	 * 전체 할 일 카드 조회
 	 * @return
 	 */
-	@GetMapping("/board")
+	@GetMapping
 	public ResponseEntity<Map<String, List<BoardListResponseDto>>> findAllBoards() {
 		return ResponseEntity.ok().body(boardService.findBoardList());
 	}
@@ -59,7 +59,7 @@ public class BoardController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/board/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<BoardResponseDto> findBoard(@PathVariable long id) {
 		Board board = boardService.findBoardById(id);
 		return ResponseEntity.ok().body(new BoardResponseDto(board));
@@ -70,7 +70,7 @@ public class BoardController {
 	 * @param id
 	 * @return
 	 */
-	@DeleteMapping("/board/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable long id) {
 		boardService.deleteBoard(id, userDetails.getUser());
 		return ResponseEntity.ok().build();
@@ -82,9 +82,20 @@ public class BoardController {
 	 * @param request
 	 * @return
 	 */
-	@PatchMapping("/board/{id}")
+	@PatchMapping("/{id}")
 	public ResponseEntity<BoardResponseDto> updateBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable long id, @RequestBody UpdateBoardRequestDto request) {
 		Board updatedBoard = boardService.updateBoard(id, request, userDetails.getUser());
 		return ResponseEntity.ok().body(new BoardResponseDto(updatedBoard));
+	}
+
+	/**
+	 * 할 일 카드 완료처리
+	 * @param id
+	 * @return
+	 */
+	@PatchMapping("/status/{id}")
+	public ResponseEntity<Void> updateBoardStatus(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable long id) {
+		boardService.updateBoardStatus(id, userDetails.getUser());
+		return ResponseEntity.ok().build();
 	}
 }
