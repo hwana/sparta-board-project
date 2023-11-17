@@ -1,4 +1,4 @@
-package com.sparta.boardproject.User.dto;
+package com.sparta.boardproject.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;

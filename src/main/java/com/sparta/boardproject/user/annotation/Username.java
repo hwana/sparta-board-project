@@ -1,6 +1,6 @@
-package com.sparta.boardproject.User.annotation;
+package com.sparta.boardproject.user.annotation;
 
-import com.sparta.boardproject.User.validator.UsernameValidator;
+import com.sparta.boardproject.user.validator.UsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import java.lang.annotation.Documented;

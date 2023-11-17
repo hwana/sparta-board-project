@@ -1,7 +1,7 @@
-package com.sparta.boardproject.User.dto;
+package com.sparta.boardproject.user.dto;
 
-import com.sparta.boardproject.User.annotation.Password;
-import com.sparta.boardproject.User.annotation.Username;
+import com.sparta.boardproject.user.annotation.Password;
+import com.sparta.boardproject.user.annotation.Username;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

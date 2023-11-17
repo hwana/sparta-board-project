@@ -1,7 +1,7 @@
-package com.sparta.boardproject.User.controller;
+package com.sparta.boardproject.user.controller;
 
-import com.sparta.boardproject.User.dto.SignupRequestDto;
-import com.sparta.boardproject.User.service.UserService;
+import com.sparta.boardproject.user.dto.SignupRequestDto;
+import com.sparta.boardproject.user.service.UserService;
 import com.sparta.boardproject.common.exception.CustomResponseEntity;
 import com.sparta.boardproject.common.exception.StatusEnum;
 import jakarta.validation.Valid;

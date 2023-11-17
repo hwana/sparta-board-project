@@ -1,6 +1,6 @@
-package com.sparta.boardproject.User.repository;
+package com.sparta.boardproject.user.repository;
 
-import com.sparta.boardproject.User.entity.User;
+import com.sparta.boardproject.user.entity.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

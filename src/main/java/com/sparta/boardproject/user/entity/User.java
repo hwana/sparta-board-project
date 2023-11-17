@@ -1,16 +1,10 @@
-package com.sparta.boardproject.User.entity;
+package com.sparta.boardproject.user.entity;
 
-import com.sparta.boardproject.board.entity.Board;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,9 +22,6 @@ public class User {
 
 	@Column(nullable = false)
 	private String password;
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Board> boards = new ArrayList<>();
 
 	public User(String username, String password) {
 		this.username = username;
