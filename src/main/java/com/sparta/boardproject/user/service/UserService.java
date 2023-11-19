@@ -1,8 +1,8 @@
-package com.sparta.boardproject.User.service;
+package com.sparta.boardproject.user.service;
 
-import com.sparta.boardproject.User.dto.SignupRequestDto;
-import com.sparta.boardproject.User.entity.User;
-import com.sparta.boardproject.User.repository.UserRepository;
+import com.sparta.boardproject.user.dto.SignupRequestDto;
+import com.sparta.boardproject.user.entity.User;
+import com.sparta.boardproject.user.repository.UserRepository;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
 import java.util.Optional;

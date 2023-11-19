@@ -1,6 +1,6 @@
 package com.sparta.boardproject.board.dto.request;
 
-import com.sparta.boardproject.User.entity.User;
+import com.sparta.boardproject.user.entity.User;
 import com.sparta.boardproject.board.entity.Board;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

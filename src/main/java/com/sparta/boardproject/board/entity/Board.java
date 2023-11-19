@@ -1,6 +1,6 @@
 package com.sparta.boardproject.board.entity;
 
-import com.sparta.boardproject.User.entity.User;
+import com.sparta.boardproject.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,9 +32,6 @@ public class Board extends BaseTime{
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@Column(nullable = false)
-	private String username;
-
 	@Column(name = "status", columnDefinition = "boolean default false")
 	private boolean status;
 
@@ -43,11 +40,14 @@ public class Board extends BaseTime{
 		this.title = title;
 		this.content = content;
 		this.user = user;
-		this.username = user.getUsername();
 	}
 
 	public void update(String title, String content){
 		this.title = title;
 		this.content = content;
+	}
+
+	public void updateStatus(){
+		this.status = true;
 	}
 }

@@ -1,7 +1,7 @@
 package com.sparta.boardproject.config.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.boardproject.User.dto.LoginRequestDto;
+import com.sparta.boardproject.user.dto.LoginRequestDto;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
 import com.sparta.boardproject.config.security.UserDetailsImpl;

@@ -1,6 +1,6 @@
 package com.sparta.boardproject.config.security;
 
-import com.sparta.boardproject.User.entity.User;
+import com.sparta.boardproject.user.entity.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import lombok.Getter;

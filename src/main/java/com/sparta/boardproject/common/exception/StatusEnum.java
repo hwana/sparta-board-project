@@ -3,12 +3,12 @@ package com.sparta.boardproject.common.exception;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.AuthenticationException;
 
 @AllArgsConstructor
 @Getter
 public enum StatusEnum {
     BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "BOARD_NOT_FOUND","게시글이 존재하지 않습니다."),
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "COMMENT_NOT_FOUND","댓글이 존재하지 않습니다."),
     BOARD_NOT_MATCHED(HttpStatus.UNAUTHORIZED, "BOARD_NOT_MATCHED", "게시글을 작성한 사용자가 아닙니다."),
     SUCCESS(HttpStatus.CREATED,"SUCCESS", "회원가입에 성공하였습니다."),
     DUPLICATED_USERNAME(HttpStatus.CONFLICT, "DUPLICATED_USERNAME", "중복된 사용자 이름이 존재합니다."),

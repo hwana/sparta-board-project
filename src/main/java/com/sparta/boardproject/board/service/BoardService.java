@@ -1,6 +1,5 @@
 package com.sparta.boardproject.board.service;
 
-import com.sparta.boardproject.User.entity.User;
 import com.sparta.boardproject.board.dto.request.CreateBoardRequestDto;
 import com.sparta.boardproject.board.dto.request.UpdateBoardRequestDto;
 import com.sparta.boardproject.board.dto.response.BoardListResponseDto;
@@ -8,6 +7,7 @@ import com.sparta.boardproject.board.entity.Board;
 import com.sparta.boardproject.board.repository.BoardRepository;
 import com.sparta.boardproject.common.exception.CustomException;
 import com.sparta.boardproject.common.exception.StatusEnum;
+import com.sparta.boardproject.user.entity.User;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class BoardService {
         return boardRepository.findAllByOrderByCreatedAtDesc()
 				.stream()
 				.map(BoardListResponseDto::new)
-				.collect(Collectors.groupingBy(boardListResponseDto -> boardListResponseDto.getUser().getUsername()));
+				.collect(Collectors.groupingBy(BoardListResponseDto::getUsername));
 	}
 
 	// 게시글 단건 조회
@@ -60,5 +60,11 @@ public class BoardService {
 	private Board getBoardByIdAndUserId(long id, long userId) {
 		return boardRepository.findByIdAndUserId(id, userId)
 				.orElseThrow(() -> new CustomException(StatusEnum.BOARD_NOT_MATCHED));
+	}
+
+	@Transactional
+	public void updateBoardStatus(long id, User user) {
+		Board board = getBoardByIdAndUserId(id, user.getId());
+		board.updateStatus();
 	}
 }
