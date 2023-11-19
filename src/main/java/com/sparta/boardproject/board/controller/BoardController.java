@@ -35,7 +35,7 @@ public class BoardController {
 	 * @param request : 할 일 카드 작성 내용
 	 * @return
 	 */
-	@PostMapping("/board")
+	@PostMapping
 	public ResponseEntity<BoardResponseDto> createBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CreateBoardRequestDto request) {
 		Board savedBoard = boardService.createBoard(request, userDetails.getUser());
 		return ResponseEntity.status(HttpStatus.CREATED).body(new BoardResponseDto(savedBoard));
