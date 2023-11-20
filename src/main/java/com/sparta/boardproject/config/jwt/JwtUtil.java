@@ -5,10 +5,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
@@ -55,12 +53,6 @@ public class JwtUtil {
 				.compact();
 	}
 
-	// JWT Cookie 에 저장
-	public void addJwtToCookie(String token, HttpServletResponse response) throws UnsupportedEncodingException{
-			token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
-			response.setHeader(AUTHORIZATION_HEADER, token);
-	}
-
 	// JWT 토큰 substring
 	public String substringToken(String tokenValue){
 		return Optional.of(tokenValue)
@@ -73,7 +65,7 @@ public class JwtUtil {
 		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
 	}
 
-	public String getTokenFromRequest(HttpServletRequest req) throws UnsupportedEncodingException{
+	public String getTokenFromRequest(HttpServletRequest req){
 		String token = req.getHeader(AUTHORIZATION_HEADER);
 		if(token != null) {
 			return URLDecoder.decode(token, StandardCharsets.UTF_8);
