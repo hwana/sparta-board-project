@@ -1,6 +1,5 @@
 package com.sparta.boardproject.config;
 
-import com.sparta.boardproject.config.jwt.JwtAuthenticationFilter;
 import com.sparta.boardproject.config.jwt.JwtAuthorizationFilter;
 import com.sparta.boardproject.config.jwt.JwtUtil;
 import com.sparta.boardproject.config.security.UserDetailsServiceImpl;
@@ -25,19 +24,12 @@ public class WebSecurityConfig {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
-    private final AuthenticationConfiguration authenticationConfiguration;
     private final AuthenticationEntryPoint entryPoint;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
             throws Exception {
         return configuration.getAuthenticationManager();
-    }
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil);
-        filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
-        return filter;
     }
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
@@ -59,8 +51,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
         );
 
-        http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class)
-            .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+        http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling(handler -> handler.authenticationEntryPoint(entryPoint)
         );
 

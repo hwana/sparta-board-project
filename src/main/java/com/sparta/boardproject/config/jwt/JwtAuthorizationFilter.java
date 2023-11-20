@@ -30,13 +30,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String tokenValue = jwtUtil.getTokenFromRequest(request);
 
         if (StringUtils.hasText(tokenValue)) {
-            try{
-                tokenValue = jwtUtil.substringToken(tokenValue);
-                String info = jwtUtil.getUserInfoFromToken(tokenValue);
-                setAuthentication(info);
-            }catch(Exception e){
-                request.setAttribute("Exception", e);
-            }
+            tokenValue = jwtUtil.substringToken(tokenValue);
+            String info = jwtUtil.getUserInfoFromToken(tokenValue);
+            setAuthentication(info);
         }
         filterChain.doFilter(request, response);
     }

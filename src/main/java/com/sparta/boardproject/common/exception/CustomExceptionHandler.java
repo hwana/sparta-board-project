@@ -36,6 +36,7 @@ public class CustomExceptionHandler {
 	public ResponseEntity<CustomResponseEntity> handleExpiredJwtException() {
 		return CustomResponseEntity.toResponseEntity(StatusEnum.ExpiredJwtException);
 	}
+
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ResponseEntity<CustomResponseEntity> handleUsernameNotFoundException() {
 		return CustomResponseEntity.toResponseEntity(StatusEnum.UsernameNotFoundException);
@@ -44,5 +45,10 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<CustomResponseEntity> handleNoSuchElementException() {
 		return CustomResponseEntity.toResponseEntity(StatusEnum.NoSuchElementException);
+	}
+
+	@ExceptionHandler(MalformedJwtException.class)
+	public ResponseEntity<CustomResponseEntity> handleMalformedJwtException() {
+		return CustomResponseEntity.toResponseEntity(StatusEnum.MalformedJwtException);
 	}
 }
