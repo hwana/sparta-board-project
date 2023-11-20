@@ -1,14 +1,13 @@
 package com.sparta.boardproject.user.service;
 
+import com.sparta.boardproject.common.exception.CustomException;
+import com.sparta.boardproject.common.exception.StatusEnum;
 import com.sparta.boardproject.config.jwt.JwtUtil;
-import com.sparta.boardproject.config.security.UserDetailsImpl;
 import com.sparta.boardproject.config.security.UserDetailsServiceImpl;
 import com.sparta.boardproject.user.dto.LoginRequestDto;
 import com.sparta.boardproject.user.dto.SignupRequestDto;
 import com.sparta.boardproject.user.entity.User;
 import com.sparta.boardproject.user.repository.UserRepository;
-import com.sparta.boardproject.common.exception.CustomException;
-import com.sparta.boardproject.common.exception.StatusEnum;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;

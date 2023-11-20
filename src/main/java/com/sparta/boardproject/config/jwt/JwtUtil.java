@@ -5,10 +5,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
@@ -67,7 +65,7 @@ public class JwtUtil {
 		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
 	}
 
-	public String getTokenFromRequest(HttpServletRequest req) throws UnsupportedEncodingException{
+	public String getTokenFromRequest(HttpServletRequest req){
 		String token = req.getHeader(AUTHORIZATION_HEADER);
 		if(token != null) {
 			return URLDecoder.decode(token, StandardCharsets.UTF_8);
