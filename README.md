@@ -2,6 +2,8 @@
 - [1주차][📰스파르타 게시판 API 만들기](https://github.com/hwana/sparta-board-project/tree/first-week)
 - [2주차]✅투두리스트 API 만들기
 
+# [2주차]✅투두리스트 API 만들기
+
 ## 요구사항
 ### 회원 가입 API
 - [x]  username, password를 Client에서 전달받기
