@@ -1,5 +1,8 @@
 package com.sparta.boardproject.config.jwt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.boardproject.common.exception.CustomResponseEntity;
+import com.sparta.boardproject.common.exception.StatusEnum;
 import com.sparta.boardproject.config.security.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,6 +25,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
+    private final ObjectMapper objectMapper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -30,9 +34,24 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String tokenValue = jwtUtil.getTokenFromRequest(request);
 
         if (StringUtils.hasText(tokenValue)) {
-            tokenValue = jwtUtil.substringToken(tokenValue);
-            String info = jwtUtil.getUserInfoFromToken(tokenValue);
-            setAuthentication(info);
+            try{
+                tokenValue = jwtUtil.substringToken(tokenValue);
+                String info = jwtUtil.getUserInfoFromToken(tokenValue);
+                setAuthentication(info);
+            }catch(Exception e){
+
+                StatusEnum statusEnum = StatusEnum.valueOf(e.getClass().getSimpleName());
+
+                CustomResponseEntity responseEntity = CustomResponseEntity.builder()
+                        .status(statusEnum.getHttpStatus().value())
+                        .description(statusEnum.getDescription())
+                        .message(statusEnum.getMessage())
+                        .build();
+
+                response.setContentType("application/json; charset=UTF-8");
+                response.getWriter().write(objectMapper.writeValueAsString(responseEntity));
+                return;
+            }
         }
         filterChain.doFilter(request, response);
     }

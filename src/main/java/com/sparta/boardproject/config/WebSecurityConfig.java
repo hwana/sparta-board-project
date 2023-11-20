@@ -1,5 +1,6 @@
 package com.sparta.boardproject.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.boardproject.config.jwt.JwtAuthorizationFilter;
 import com.sparta.boardproject.config.jwt.JwtUtil;
 import com.sparta.boardproject.config.security.UserDetailsServiceImpl;
@@ -24,7 +25,7 @@ public class WebSecurityConfig {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
-    private final AuthenticationEntryPoint entryPoint;
+    private final ObjectMapper objectMapper;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
@@ -33,7 +34,7 @@ public class WebSecurityConfig {
     }
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
-        return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
+        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, objectMapper);
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -51,9 +52,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
         );
 
-        http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-            .exceptionHandling(handler -> handler.authenticationEntryPoint(entryPoint)
-        );
+        http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
